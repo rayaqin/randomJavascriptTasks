@@ -1,0 +1,46 @@
+var clearButton = document.getElementById("clearButton");
+var runButton = document.getElementById("runButton");
+var canvas = document.getElementById("canvas");
+
+clearButton.onclick = clearCanvas;
+runButton.onclick = runScript;
+
+var word1 = "abcaaaaaaa";
+var word2 = "kcskkkkkkk";
+
+function clearCanvas() {
+  canvas.style.justifyContent = "center";
+  canvas.style.alignItems = "center";
+  canvas.innerHTML = "Cleared...";
+}
+
+function runScript() {
+  canvas.style.justifyContent = "flex-start";
+  canvas.style.alignItems = "stretch";
+  let result = solution();
+
+
+  canvas.innerHTML = result;
+}
+
+function solution(){
+	
+	if(convertToCoded(word1) == convertToCoded(word2)){
+		return "Yes, " + word1 + " and " + word2 + " are isomorphic.";
+	} else {
+		return "No, " + word1 + " and " + word2 + " are not isomorphic.";
+	};
+	//return "╭━┳━╭━╭━╮╮<br/>┃┈┈┈┣▅╋▅┫┃<br/>┃┈┃┈╰━╰━━━━━━╮<br/>╰┳╯┈┈┈┈┈┈┈┈┈◢▉◣<br/>╲┃┈┈┈┈┈┈┈┈┈▉▉▉<br/>╲┃┈┈┈┈┈┈┈┈┈◥▉◤<br/>╲┃┈┈┈┈╭━┳━━━━╯<br/>╲┣━━━━━━┫﻿";
+}
+
+function convertToCoded(word){
+	var re = new RegExp(word,"g");
+    for(let i=0; i<word.length; i++){
+		if(isNaN(word[i])){
+			re = new RegExp(word[i],"g");
+        	word = word.replace(re, i.toString());
+			console.log(word);
+        }	
+	}
+	return word;
+}

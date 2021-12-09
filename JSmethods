@@ -1,0 +1,50 @@
+String manipulation:
+
+indexOf()
+	returns the position of the first occurrence of a specified value in a string.
+	
+	var str = "Hello world, welcome to the universe.";
+	var n = str.indexOf("welcome"); //13
+
+String length: length
+	returns the number of characters in a string
+	
+	var str = "Hello World!";
+	var n = str.length; //12
+	
+Size of Objects:
+	var size = Object.keys(myObj).length;
+	
+Extract a substring from a string:
+	var str = "Hello world!";
+	var res = str.substring(1, 4); //ell
+	
+Number to String:
+	var num=213; 
+    var n = num.toString(); //213
+
+Sort array of strings:
+	var array1 = ["Ba", "Oo", "Aa"];
+	array1.sort(); //Aa Ba Oo
+	
+Reverse the order of elements in a string array:
+	var array1 = ["Ba", "Oo", "Aa"];
+	array1.reverse(); //Aa Oo Ba
+	
+Slice out a part of the original array:
+	var arr = [23,56,87,32,75,13];
+	var new_arr = arr.slice(2,4);	//87, 32
+
+looping through an array:
+	someValues.forEach((element, index) => {
+		console.log("index: "+ index);
+		console.log("element: " + element);
+	});
+	
+performance measurement:
+	var entireStart = performance.now();
+	var entireFinish = performance.now();
+	console.log("Completion time: " + (entireFinish - entireStart));
+	
+return random number up to max-1:
+	Math.floor(Math.random() * Math.floor(max))
