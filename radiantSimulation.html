@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <title>Radiant Simulation</title>
+    <link
+      rel="stylesheet"
+      href="radiantSimulation.css"
+    />
+  </head>
+  <body>
+    <div
+      class="canvas_wrapper"
+      id="canvas_wrapper"
+    >
+      <div class="control_panel">
+        <div class="toggle_cycles_wrapper">
+          <label
+            for="toggle_cycles"
+            id="toggle_cycles_label"
+            >Run</label
+          >
+          <label class="md_switch">
+            <input
+              id="toggle_cycles"
+              type="checkbox"
+            />
+            <span class="md_switch__toggle"></span>
+          </label>
+        </div>
+        <div class="toggle_radiant_wrapper">
+          <label
+            for="toggle_radiant"
+            id="toggle_radiant_label"
+            >Add radiant</label
+          >
+          <label class="md_switch">
+            <input
+              id="toggle_radiant"
+              type="checkbox"
+            />
+            <span class="md_switch__toggle"></span>
+          </label>
+        </div>
+        <div class="reset_button_wrapper">
+          <button id="reset">Reset</button>
+        </div>
+        <div class="display_data">
+          <div>Cycles completed: <span id="data_cycleCount">-</span></div>
+          <div>Average: <span id="data_average">-</span></div>
+        </div>
+      </div>
+      <canvas
+        id="canvas"
+        width="500"
+        height="500"
+      ></canvas>
+      <div class="extended_control_panel">
+        <div class="speed_slider_wrapper">
+          <label for="speed_slider">Speed</label>
+          <input
+            id="speed_slider"
+            type="range"
+            min="0"
+            step="200"
+            max="1000"
+            value="1000"
+          />
+        </div>
+        <div class="noise_slider_wrapper">
+          <label for="noise_slider">Noise</label>
+          <input
+            id="noise_slider"
+            type="range"
+            min="0"
+            step="0.01"
+            max="0.50"
+            value="0.05"
+          />
+        </div>
+        <div class="attitude_slider_wrapper">
+          <label for="attitude_slider">Attitude stability</label>
+          <input
+            id="attitude_slider"
+            type="range"
+            min="0"
+            step="0.01"
+            max="0.3"
+            value="0.1"
+          />
+        </div>
+        <div class="quantity_slider_wrapper">
+          <label for="quantity_slider">Quantity</label>
+          <input
+            id="quantity_slider"
+            type="range"
+            min="4"
+            step="2"
+            max="200"
+            value="80"
+          />
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="radiantSimulation.js"></script>
+</html>

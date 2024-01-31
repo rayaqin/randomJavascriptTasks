@@ -1,0 +1,161 @@
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  background-color: rgb(44, 48, 54);
+  color: white;
+  font-weight: bold;
+}
+
+.canvas_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-width: 520px;
+}
+
+.control_panel {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  padding: 1rem;
+}
+
+.display_data {
+  font-size: 1rem;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+canvas {
+  border: 2px solid rgb(48, 50, 71);
+  padding: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 0.8rem;
+}
+
+.toggle_cycles_wrapper,
+.toggle_radiant_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.toggle_radiant_wrapper {
+  width: 8rem;
+}
+
+.extended_control_panel {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 300px;
+}
+
+.extended_control_panel > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+  border-radius: 2rem;
+  background-color: rgb(30, 30, 38) !important;
+  cursor: pointer;
+}
+.reset_button_wrapper {
+  height: 100%;
+  width: 4rem;
+}
+.reset_button_wrapper > button {
+  height: 100%;
+  width: 100%;
+  border-radius: 1rem;
+  border: none;
+  font-weight: 700;
+  background-color: rgb(72, 75, 106);
+  color: white;
+  transition: all 0.3s ease-in-out;
+}
+
+.reset_button_wrapper > button:hover {
+  background-color: rgb(75, 80, 136);
+  cursor: pointer;
+}
+
+.md_switch {
+  display: inline-flex;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.md_switch .md_switch__toggle {
+  position: relative;
+  cursor: pointer;
+}
+
+.md_switch [type='checkbox'] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* default states */
+
+.md_switch .md_switch__toggle::before,
+.md_switch .md_switch__toggle::after {
+  content: '';
+  display: block;
+  margin: 0 3px;
+  transition: all 100ms cubic-bezier(0.4, 0, 0.2, 1);
+  background: #bdbdbd;
+}
+
+.md_switch .md_switch__toggle::before {
+  height: 1.3em;
+  width: 3em;
+  border-radius: 0.65em;
+  opacity: 0.6;
+}
+
+.md_switch .md_switch__toggle::after {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  height: 1.7em;
+  width: 1.7em;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2), 0 0 2px rgba(0, 0, 0, 0.4);
+}
+
+/* special states */
+.md_switch [type='checkbox']:focus + .md_switch__toggle {
+  outline: none;
+  box-shadow: none;
+}
+
+/* checked states */
+
+.md_switch [type='checkbox']:checked + .md_switch__toggle::before,
+.md_switch [type='checkbox']:checked + .md_switch__toggle::after {
+  background: #00897b;
+}
+
+.md_switch [type='checkbox']:checked + .md_switch__toggle::after {
+  transform: translate(calc(3em - 100%), -50%);
+}
