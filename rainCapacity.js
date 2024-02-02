@@ -1,22 +1,26 @@
-var clearButton = document.getElementById("clearButton");
-var runButton = document.getElementById("runButton");
-var canvas = document.getElementById("canvas");
-var limitedCanvas = document.getElementById("limitedCanvas");
-var inputButton = document.getElementById("inputButton");
-var inputField = document.getElementById("inputField");
+const clearButton = document.getElementById("clearButton");
+const runButton = document.getElementById("runButton");
+const canvas = document.getElementById("canvas");
+const limitedCanvas = document.getElementById("limitedCanvas");
+
+const inputButton = document.getElementById("inputButton");
+const inputField = document.getElementById("inputField");
+const inputControlDiv = document.getElementById("input");
+
+inputControlDiv.style.visibility = "visible";
+inputButton.onclick = runScript;
 
 clearButton.onclick = clearCanvas;
 runButton.onclick = runScript;
-inputButton.onclick = readInput;
 
-var inputStorage = "";
-var array0 = [0, 1, 0, 1, 0];
-var array1 = [0, 1, 0, 2, 0, 2, 3, 0, 19, 2, 1, 2, 3, 0, 1, 0, 2, 0, 19, 3, 0, 3, 2, 1, 2, 3, 0];
-var array2 = [9, 0, 0, 0, 9, 5, 0, 0, 0, 0, 0, 5, 3, 0, 0, 0, 3, 5, 0, 0, 0, 4, 0, 0, 0, 5];
-var array3 = [1, 0, 2, 0, 2, 7, 0, 1, 0, 2, 0, 2, 7, 0, 5, 2, 1, 2, 3, 0, 1, 0, 2, 0, 5, 3, 0, 3, 5, 1, 2, 3, 6, 7, 0, 1, 0, 2];
-var testArray = array3;
+let inputStorage = "";
+const array0 = [0, 1, 0, 1, 0];
+const array1 = [0, 1, 0, 2, 0, 2, 3, 0, 19, 2, 1, 2, 3, 0, 1, 0, 2, 0, 19, 3, 0, 3, 2, 1, 2, 3, 0];
+const array2 = [9, 0, 0, 0, 9, 5, 0, 0, 0, 0, 0, 5, 3, 0, 0, 0, 3, 5, 0, 0, 0, 4, 0, 0, 0, 5];
+const array3 = [1, 0, 2, 0, 2, 7, 0, 1, 0, 2, 0, 2, 7, 0, 5, 2, 1, 2, 3, 0, 1, 0, 2, 0, 5, 3, 0, 3, 5, 1, 2, 3, 6, 7, 0, 1, 0, 2];
 
-document.getElementById("input").style.visibility = "hidden";
+inputField.value = array3.join(",");
+
 
 function clearCanvas() {
 	canvas.style.justifyContent = "center";
@@ -34,13 +38,16 @@ function runScript() {
 	limitedCanvas.style.display = "block";
 
 	let result = "";
-	result = solution(testArray);
+	let cleanedInput = inputField.value.split("").filter(c => isNaN(c) === false || c === ',').join("");
+	inputField.value = cleanedInput;
+	let cleanedInputArray = cleanedInput.split(",").map(Number);
+	if (cleanedInputArray.length <= 1) { // 1 because "".split(',') returns [""] and not []
+		result = "Not valid input";
+		limitedCanvas.innerHTML = result;
+		return;
+	}
+	result = solution(cleanedInputArray);
 	limitedCanvas.innerHTML = result;
-}
-
-function readInput() {
-	inputStorage = "" + inputField.value;
-	inputField.value = "";
 }
 
 function solution(intArray) {
@@ -62,8 +69,6 @@ function solution(intArray) {
 	result += "</br><span class=\"textResult\">The rain capacity is: " + rainCapacity + "</span>";
 
 	return result;
-
-	//return "╭━┳━╭━╭━╮╮<br/>┃┈┈┈┣▅╋▅┫┃<br/>┃┈┃┈╰━╰━━━━━━╮<br/>╰┳╯┈┈┈┈┈┈┈┈┈◢▉◣<br/>╲┃┈┈┈┈┈┈┈┈┈▉▉▉<br/>╲┃┈┈┈┈┈┈┈┈┈◥▉◤<br/>╲┃┈┈┈┈╭━┳━━━━╯<br/>╲┣━━━━━━┫﻿";
 }
 
 function calcMaxHeight(numberArray) {

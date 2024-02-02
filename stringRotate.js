@@ -4,74 +4,62 @@ var canvas = document.getElementById("canvas");
 
 clearButton.onclick = clearCanvas;
 runButton.onclick = runScript;
+canvas.style.alignItems = "stretch";
+canvas.style.justifyContent = "flex-start";
+canvas.style.fontSize = "25px";
 
-var exampleArray = ["~>~","~a~","~b~","~c~","~d~","~e~","~f~","~g~","~h~","~i~","~j~",];
+
+const exampleArray = ["~>~", "~a~", "~b~", "~c~", "~d~", "~e~", "~f~", "~g~", "~h~", "~i~", "~j~",];
+let resultArray = [...exampleArray];
+canvas.innerHTML = exampleArray.join('');
 
 function clearCanvas() {
-  canvas.style.justifyContent = "center";
-  canvas.style.alignItems = "center";
-  canvas.innerHTML = "Cleared...";
+	canvas.style.justifyContent = "center";
+	canvas.style.alignItems = "center";
+	canvas.innerHTML = "Cleared...";
 }
 
 function runScript() {
-  canvas.style.justifyContent = "flex-start";
-  canvas.style.alignItems = "stretch";
-  let result = solution();
-
-  //Task implementation
-
-  canvas.innerHTML = result;
+	let result = solution();
+	canvas.innerHTML = result;
 }
 
-function solution(){
-	var entireStart = performance.now();
-	
-	var result = "";
+function solution() {
+	const start = performance.now();
 
-	this.exampleArray = rotate(this.exampleArray,24522);
-	canvas.style.fontSize = "25px";
-	
-	var entireFinish = performance.now();
-	console.log("Completion time: " + (entireFinish - entireStart));
-	exampleArray.forEach((element)=>{result+=element});
-	return result;
-	//return "╭━┳━╭━╭━╮╮<br/>┃┈┈┈┣▅╋▅┫┃<br/>┃┈┃┈╰━╰━━━━━━╮<br/>╰┳╯┈┈┈┈┈┈┈┈┈◢▉◣<br/>╲┃┈┈┈┈┈┈┈┈┈▉▉▉<br/>╲┃┈┈┈┈┈┈┈┈┈◥▉◤<br/>╲┃┈┈┈┈╭━┳━━━━╯<br/>╲┣━━━━━━┫﻿";
+	resultArray = rotate(resultArray, 25511);
+
+	const finish = performance.now();
+	console.log("Completion time: " + (finish - start).toFixed(2) + " ms");
+
+	return resultArray.join('');
 }
 
-function rotate(inputArray, displacement){
-	if(isValidString(inputArray) == false){
-		return "wrong input array";
+function rotate(inputArray, displacement) {
+	if (isValidStringArray(inputArray) == false) {
+		return "wrong input";
 	};
-	if(isNaN(displacement)){
-		return "wrong displacement number";
+	if (isNaN(displacement)) {
+		return "wrong displacement value";
 	}
-	var inputSize = Object.keys(inputArray).length
-	
-	displacement = simplifyBigDisplacement(displacement, inputSize);
-	
-	var resultArray = inputArray.slice();
+
+	let simplifedDisplacement = displacement % inputArray.length;
+
+	const rotatedArray = [];
 	inputArray.forEach((element, index) => {
-		resultArray[getTargetIndex(index, inputSize, displacement)] = element;
+		rotatedArray[getTargetIndex(index, inputArray.length, simplifedDisplacement)] = element;
 	});
-	return resultArray;
+	return rotatedArray;
 }
 
-function getTargetIndex(currentIndex, size, displacement){
-	if(currentIndex + displacement < size){
+function getTargetIndex(currentIndex, size, displacement) {
+	if (currentIndex + displacement < size) {
 		return currentIndex + displacement;
 	} else {
-		return Math.abs(size-(currentIndex+displacement));
+		return Math.abs(size - (currentIndex + displacement));
 	}
 }
 
-function simplifyBigDisplacement(displacement, size){
-	return displacement%size;
-}
-
-function isValidString(inputArray){
-	if(inputArray!= undefined && inputArray!= null && typeof(inputArray)==="object" && typeof(inputArray[0]) === "string"){
-		return true;
-	} else {
-		return false;
-	}
+function isValidStringArray(inputArray) {
+	return Array.isArray(inputArray) && inputArray.every(element => typeof element === "string");
 }

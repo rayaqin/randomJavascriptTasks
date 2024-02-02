@@ -1,12 +1,9 @@
-var clearButton = document.getElementById("clearButton");
-var runButton = document.getElementById("runButton");
-var canvas = document.getElementById("canvas");
+const clearButton = document.getElementById("clearButton");
+const runButton = document.getElementById("runButton");
+const canvas = document.getElementById("canvas");
 
 clearButton.onclick = clearCanvas;
 runButton.onclick = runScript;
-
-var word1 = "abcaaaaaaa";
-var word2 = "kcskkkkkkk";
 
 function clearCanvas() {
 	canvas.style.justifyContent = "center";
@@ -22,29 +19,24 @@ function runScript() {
 	canvas.innerHTML = result;
 }
 
-function solution(){
-	var entireStart = performance.now();
-	var result = "";
-	if(convertToCoded(word1) == convertToCoded(word2)){
-		result=  "Yes, " + word1 + " and " + word2 + " are isomorphic.";
-	} else {
-		result= "No, " + word1 + " and " + word2 + " are not isomorphic.";
-	};
-	
-	var entireFinish = performance.now();
+function solution() {
+	const word1 = "abcaaaaaaa";
+	const word2 = "kcskkkkkka";
+
+	const entireStart = performance.now();
+	let isIsomorphic = getCodedWord(word1) === getCodedWord(word2);
+	const entireFinish = performance.now();
+
 	console.log("Completion time: " + (entireFinish - entireStart));
-	return result;
-	//return "╭━┳━╭━╭━╮╮<br/>┃┈┈┈┣▅╋▅┫┃<br/>┃┈┃┈╰━╰━━━━━━╮<br/>╰┳╯┈┈┈┈┈┈┈┈┈◢▉◣<br/>╲┃┈┈┈┈┈┈┈┈┈▉▉▉<br/>╲┃┈┈┈┈┈┈┈┈┈◥▉◤<br/>╲┃┈┈┈┈╭━┳━━━━╯<br/>╲┣━━━━━━┫﻿";
+	return (isIsomorphic ? "Yes" : "No") + ", " + word1 + " and " + word2 + " are " + (isIsomorphic ? "" : "not ") + "isomorphic.";
 }
 
-function convertToCoded(word){
-	console.dir("converting word");
-	var re = new RegExp(word,"g");
-    for(let i=0; i<word.length; i++){
-		if(isNaN(word[i])){
-			re = new RegExp(word[i],"g");
-        	word = word.replace(re, i.toString());
-        }	
+function getCodedWord(word) {
+	let codedWord = word;
+	for (let i = 0; i < word.length; i++) {
+		if (isNaN(word[i])) {
+			codedWord = codedWord.replaceAll(word[i], i);
+		}
 	}
-	return word;
+	return codedWord;
 }
