@@ -132,6 +132,7 @@ function calcLeftSideSupport(inputArray) {
 	}
 	return resultArray;
 }
+
 function calcRightSideSupport(inputArray) {
 	let resultArray = [];
 	let tempMax = 0;
