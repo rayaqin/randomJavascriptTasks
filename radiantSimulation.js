@@ -50,8 +50,6 @@ function handleQuantitySliderChange(event) {
   reset();
 }
 
-
-
 let cycleCount = 0;
 
 const getNeighbourIds = (x, y, rowLength, columnLength) => {
@@ -194,9 +192,10 @@ const restartCycleWithNewSpeed = () => {
 };
 
 function reset() {
-  currentInterval && clearInterval(currentInterval);
-  currentInterval = null;
   toggleCyclesCheckbox.checked = false;
+  toggleCyclesLabel.innerHTML = "Run";
+  clearInterval(currentInterval);
+  currentInterval = null;
   cycleCount = 0;
   cycleCountElement.innerHTML = cycleCount;
   averageElement.innerHTML = 0;
